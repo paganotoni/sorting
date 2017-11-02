@@ -1,4 +1,4 @@
-package quicksort
+package sorting
 
 func quicksort(data []int) []int {
 

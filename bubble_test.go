@@ -7,8 +7,7 @@ import (
 	"testing"
 )
 
-func TestQuicksort(t *testing.T) {
-
+func TestBubble(t *testing.T) {
 	cases := []struct {
 		Data     []int
 		Expected []int
@@ -27,17 +26,27 @@ func TestQuicksort(t *testing.T) {
 			target := make([]int, len(tcase.Data))
 			copy(target, tcase.Data)
 
-			quicksort(target)
+			bubblesort(target)
 			if reflect.DeepEqual(target, tcase.Expected) == false {
 				t.Errorf("Output for %v should be %v but instead was %v", tcase.Data, tcase.Expected, target)
 			}
 		})
 
 	}
-
 }
 
-func BenchmarkQuicksort100(b *testing.B) {
+func BenchmarkBubble100(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 100)
+		for j := 0; j < 100; j++ {
+			data[j] = rand.Int()
+		}
+
+		bubblesort(data)
+	}
+}
+
+func BenchmarkBubblesort(b *testing.B) {
 	lengths := []int{10, 100, 1000, 10000}
 
 	for _, length := range lengths {
@@ -48,7 +57,7 @@ func BenchmarkQuicksort100(b *testing.B) {
 					data[j] = rand.Int()
 				}
 
-				quicksort(data)
+				bubblesort(data)
 			}
 		})
 	}
