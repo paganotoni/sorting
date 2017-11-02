@@ -9,8 +9,8 @@ import (
 func TestQuicksort(t *testing.T) {
 
 	cases := []struct {
-		Input  []int
-		Output []int
+		Data     []int
+		Expected []int
 	}{
 		{[]int{5, 3, 7, 6, 2, 1, 4}, []int{1, 2, 3, 4, 5, 6, 7}},
 		{[]int{2, 3, 4, 6, 5, 1, 7}, []int{1, 2, 3, 4, 5, 6, 7}},
@@ -22,10 +22,13 @@ func TestQuicksort(t *testing.T) {
 
 	for _, tcase := range cases {
 
-		t.Run(fmt.Sprintf("%v", tcase.Input), func(t *testing.T) {
-			result := quicksort(tcase.Input)
-			if reflect.DeepEqual(result, tcase.Output) == false {
-				t.Errorf("Output for %v should be %v but instead was %v", tcase.Input, tcase.Output, result)
+		t.Run(fmt.Sprintf("%v", tcase.Data), func(t *testing.T) {
+			target := make([]int, len(tcase.Data))
+			copy(target, tcase.Data)
+
+			quicksort(target)
+			if reflect.DeepEqual(target, tcase.Expected) == false {
+				t.Errorf("Output for %v should be %v but instead was %v", tcase.Data, tcase.Expected, target)
 			}
 		})
 

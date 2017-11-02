@@ -6,17 +6,16 @@ func quicksort(data []int) []int {
 		return data
 	}
 
-	pivotIdx := len(data) - 1
-	pivot := data[pivotIdx]
+	pivot := data[len(data)-1]
 	cutIndex := -1
 
-	j := pivotIdx
+	j := len(data) - 1
 	i := 0
 
 	for true {
 
-		iData := data[i]
-		jData := data[j]
+		ivalue := data[i]
+		jvalue := data[j]
 
 		needsSwitch := data[i] > data[j]
 
@@ -26,11 +25,11 @@ func quicksort(data []int) []int {
 			data[i] = tmp
 		}
 
-		if jData > pivot {
+		if jvalue > pivot {
 			j--
 		}
 
-		if iData < pivot {
+		if ivalue < pivot {
 			i++
 		}
 
